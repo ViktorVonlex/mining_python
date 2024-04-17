@@ -84,14 +84,19 @@ data['Area Category'] = pd.Categorical(data['Area Category'], categories=['Centr
 data['Area Category'].value_counts().sort_index().plot(kind='bar')
 plt.title("Area Category")
 plt.xlabel("Area")
-plt.xticks(rotation=90)
+plt.xticks(rotation=45)
 plt.ylabel("Frequency")
 plt.show()
 
 # Primary Type
 # data['Primary Type'] = pd.Categorical(data['Primary Type'], categories=['BATTERY', 'THEFT', 'CRIMINAL DAMAGE', 'NARCOTICS', 'ASSAULT', 'OTHER OFFENSE', 'BURGLARY', 'MOTOR VEHICLE THEFT', 'DECEPTIVE PRACTICE', 'ROBBERY'], ordered=True)
 
-data['Primary Type'].value_counts().sort_index().plot(kind='bar')
+# Get value counts and filter those with frequency >= 10k
+value_counts = data['Primary Type'].value_counts()
+filtered_value_counts = value_counts[value_counts >= 10000]
+
+# Plot the filtered value counts
+filtered_value_counts.sort_index().plot(kind='bar')
 plt.title("Primary Type")
 plt.xlabel("Type")
 plt.xticks(rotation=90)
